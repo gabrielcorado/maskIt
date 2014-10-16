@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>maskIt - Examples</title>
+    <script src="../maskIt.js" charset="utf-8"></script>
+    <script charset="utf-8">
+      var input;
+      window.addEventListener('load', function() {
+        // Select input
+        input = document.getElementById('phone_number');
+
+        // Mask it!
+        input.maskItWith('+NN (NN) NNNN-NNNN');
+
+        // Check button
+        document.getElementById('check_button').addEventListener('click', function(e){
+          if( input.masked() )
+            alert('The input is correct.')
+          else
+            alert('Some problems in the input.')
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <label>
+      Phone number <strong>+NN (NN) NNNN-NNNN</strong><br />
+      <input type="text" id="phone_number" name="phoneNumber" value="">
+    </label>
+    <button name="check" id="check_button">Check!</button>
+  </body>
+</html>
