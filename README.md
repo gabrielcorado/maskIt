@@ -22,7 +22,10 @@ var input = document.getElementById('input');
 input.maskItWith('(NN) NNNN-NNNN');
 
 // Checks if user fill it correct
-input.masked();
+if( input.masked() )
+  alert('Correct!');
+else
+  alert('Wrong!');
 ```
 
 ## Improvements
