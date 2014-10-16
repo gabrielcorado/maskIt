@@ -6,7 +6,11 @@ A simple input mask.
 
 ### Creating a mask
 
-The mask accept two types of data: Number(N) and Character(C) and so you can do awesome masks like `NNNN-NNN` or `CC-NN`
+The mask accept two types of data: Number(`N`) and Character(`C`) and so you can do awesome masks like `NNNN-NNN` or `CC-NN`.
+
+### Validate field
+
+You can validate the field with method `masked()`.
 
 ### Example
 
@@ -24,8 +28,9 @@ input.masked();
 ## Improvements
 
 * Add mask character limiter
+* Improve the validator
 * and others that appear
 
 ## Browser support
 
-I don`t test in the browsers but i think it will works.
+I don't test in the browsers but i think it will works.
