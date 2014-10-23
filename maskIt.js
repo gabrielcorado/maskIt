@@ -3,7 +3,7 @@
  * JavaScript mask without jQuery.
  *
  * @author Gabriel Corado
- * @version 0.0.2
+ * @version 0.0.3
  */
 
 /**
@@ -45,10 +45,13 @@ String.prototype.replaceAt = function( index, value ) {
  * @return {String}             'number', 'character' or undefined
  */
 KeyboardEvent.prototype.dataType = function() {
+  // Get value
+  var value = String.fromCharCode(this.which);
+
   // Checks
-  if( ( this.which > 47 && this.which < 58 ) || ( this.which > 95 && this.which < 106 ) )
+  if( /[0-9]/.test(value) )
     return 'number';
-  else if ( this.which > 64 && this.which < 91 )
+  else if ( /[a-z]/i.test(value) )
     return 'character';
   else
     return undefined;
