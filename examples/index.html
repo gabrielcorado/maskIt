@@ -19,14 +19,29 @@
           else
             alert('Some problems in the input.')
         });
+
+        // Name
+        var name = document.getElementById('name');
+
+        // Set limit
+        name.limitCharactersIn(50);
       });
     </script>
   </head>
   <body>
-    <label>
-      Phone number <strong>+NN (NN) NNNN-NNNN</strong><br />
-      <input type="text" id="phone_number" name="phoneNumber" value="">
-    </label>
-    <button name="check" id="check_button">Check!</button>
+    <section>
+      <label>
+        Phone number <strong>+NN (NN) NNNN-NNNN</strong><br />
+        <input type="text" id="phone_number" name="phoneNumber" value="">
+      </label>
+      <button name="check" id="check_button">Check!</button>
+    </section>
+
+    <section>
+      <label>
+        Name <strong>(limit 50)</strong><br />
+        <input type="text" id="name" value="">
+      </label>
+    </section>
   </body>
 </html>

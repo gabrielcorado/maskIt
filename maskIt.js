@@ -225,3 +225,29 @@ Element.prototype.maskItWith = function(pattern, options) {
   // Delegate Event
   this._maskEvent();
 }
+
+/*
+ * Add limit of characters
+ * @function
+ * @param {Integer} limit       Limit of string
+ */
+Element.prototype.limitCharactersIn = function(limit) {
+  // Checks limit
+  if( isNaN(limit) || limit < 0 )
+    throw new Error('limit must be a number greater than zero');
+
+  // Set limit
+  this._limit = limit;
+
+  // Live Change
+  this.addEventListener('keydown', function(e) {
+    var eventDataType = e.dataType();
+
+    console.log(e.target.value);
+
+    // Checks size
+    if( eventDataType == 'value' || ( e.target.value.length >= e.target._limit && ['number', 'character', 'space'].indexOf(eventDataType) > -1 ) )
+      e.preventDefault();
+
+  });
+}

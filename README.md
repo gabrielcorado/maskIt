@@ -28,6 +28,20 @@ else
   alert('Wrong!');
 ```
 
+### Limit characters
+
+You limit a input in N characters.
+
+### Example
+
+```javascript
+// Select input
+var input = document.getElementById('input');
+
+// Limit in 50 characters
+input.limitCharactersIn(50);
+```
+
 ## Improvements
 
 * Add mask character limiter
