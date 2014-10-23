@@ -40,38 +40,45 @@ String.prototype.replaceAt = function( index, value ) {
 }
 
 /*
+ * Checks if the keyboard input changes the input value
+ * @function
+ * @return {Boolean}
+ */
+KeyboardEvent.prototype.isMetaChangerValue = function() {
+  // Checks
+  if( this.metaKey || this.ctrlKey ) {
+    if( ['X', 'V', 'C', 'Z', 'Y'].indexOf(String.fromCharCode(this.which)) > -1 )
+      return true;
+  }
+
+  // Defaul return
+  return false;
+}
+
+/*
  * Get the keyboard entry type
  * @function
- * @return {String}             'number', 'character' or undefined
+ * @return {String}             'value', 'meta', 'number', 'character', 'space', 'backspace' or undefined
  */
 KeyboardEvent.prototype.dataType = function() {
   // Get value
   var value = String.fromCharCode(this.which);
 
   // Checks
-  if( /[0-9]/.test(value) )
+  if( this.isMetaChangerValue() )
+    return 'value';
+  else if( this.metaKey || this.altKey || this.ctrlKey )
+    return 'meta';
+  else if( /[0-9]/.test(value) )
     return 'number';
-  else if ( /[a-z]/i.test(value) )
+  else if( /[a-z]/i.test(value) )
     return 'character';
+  else if( /\s/.test(value) )
+    return 'space';
+  else if( /[\b]/.test(value) )
+    return 'backspace';
   else
     return undefined;
-}
-
-/*
- * Called when a input has change.
- * @function
- * @param {Function} cb           Callback
- */
-Element.prototype.liveChange = function(cb) {
-  // Key Event
-  this.addEventListener('keydown', function(e) {
-    // Not combined
-    if( !( e.metaKey || e.altKey || e.ctrlKey ) ) {
-      // A-Z, 0-9, BACKSPACE, DELETE, SPACE and 0-9 NUMPAD
-      if( String.fromCharCode(e.which) != '' )
-        cb(e);
-    }
-  });
 }
 
 /*
@@ -140,7 +147,7 @@ Element.prototype._maskEvent = function() {
     return;
 
   // Live Change
-  this.liveChange(function(e) {
+  this.addEventListener('keydown', function(e) {
 
     var el = e.target,
         nextIndex = el.cursorPosition(),
@@ -148,7 +155,7 @@ Element.prototype._maskEvent = function() {
         patternValue = el._mask.pattern[nextIndex],
         eventDataType = e.dataType();
 
-    if( eventDataType != undefined && patternValue != undefined ) {
+    if( ['number', 'character'].indexOf(eventDataType) > -1 && patternValue != undefined ) {
 
       // While has a delimiter
       while( true ) {
@@ -156,7 +163,7 @@ Element.prototype._maskEvent = function() {
         patternValue = el._mask.pattern[nextIndex];
 
         // Pattern Value
-        if( patternValue.toUpperCase() != 'N' && patternValue.toUpperCase() != 'C' ) {
+        if( ['N', 'C'].indexOf(patternValue.toUpperCase()) == -1 ) {
           el._updateValue(patternValue, nextIndex);
           nextIndex++;
         } else if( patternValue.toUpperCase() == eventDataType[0].toUpperCase() ) {
@@ -172,7 +179,7 @@ Element.prototype._maskEvent = function() {
     }
 
     // Prevent Default
-    if( eventDataType != undefined )
+    if( eventDataType != 'backspace' && eventDataType != 'meta' )
       e.preventDefault();
   });
 
