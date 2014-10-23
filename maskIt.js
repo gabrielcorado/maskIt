@@ -3,7 +3,7 @@
  * JavaScript mask without jQuery.
  *
  * @author Gabriel Corado
- * @version 0.0.0
+ * @version 0.0.1
  */
 
 /**
@@ -65,7 +65,7 @@ Element.prototype.liveChange = function(cb) {
     // Not combined
     if( !( e.metaKey || e.altKey || e.ctrlKey ) ) {
       // A-Z, 0-9, BACKSPACE, DELETE, SPACE and 0-9 NUMPAD
-      if( ( e.which > 47 && e.which < 91 ) || e.which == 8 || e.which == 46 || e.which == 32 || ( e.which > 95 && e.which < 106 ) )
+      if( String.fromCharCode(e.which) != '' )
         cb(e);
     }
   });
