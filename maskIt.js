@@ -3,7 +3,7 @@
  * JavaScript mask without jQuery.
  *
  * @author Gabriel Corado
- * @version 0.0.1
+ * @version 0.0.2
  */
 
 /**
@@ -169,7 +169,7 @@ Element.prototype._maskEvent = function() {
     }
 
     // Prevent Default
-    if( !(e.which == 8 || e.which == 46) )
+    if( eventDataType != undefined )
       e.preventDefault();
   });
 
