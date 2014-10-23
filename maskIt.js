@@ -3,7 +3,7 @@
  * JavaScript mask without jQuery.
  *
  * @author Gabriel Corado
- * @version 0.1.0
+ * @version 0.1.1
  */
 
 /**
@@ -47,7 +47,7 @@ String.prototype.replaceAt = function( index, value ) {
 KeyboardEvent.prototype.isMetaChangerValue = function() {
   // Checks
   if( this.metaKey || this.ctrlKey ) {
-    if( ['X', 'V', 'C', 'Z', 'Y'].indexOf(String.fromCharCode(this.which)) > -1 )
+    if( ['X', 'V', 'Z', 'Y'].indexOf(String.fromCharCode(this.which)) > -1 )
       return true;
   }
 
